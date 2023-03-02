@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 type Router struct{}
@@ -11,7 +13,7 @@ type Router struct{}
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, "<h1>Welcome to Pet Search</h1><p><a href=\"/contact\">Contact</a>")
+	fmt.Fprint(w, "<h1>Welcome to Pet Search</h1><p><a href=\"/contact\">Contact</a><p><a href=\"/faq\">faq</a>")
 
 }
 
@@ -52,18 +54,18 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "<h1>Contact Page</h1><p>Contact Us: <a href=\"mailto:paul@paul.com\">paul@paul.com</a>.")
 }
 
-func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	switch r.URL.Path {
-	case "/":
-		homeHandler(w, r)
-	case "/contact":
-		contactHandler(w, r)
-	case "/faq":
-		faqHandler(w, r)
-	default:
-		http.Error(w, "Page not found", http.StatusNotFound)
-	}
-}
+// func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+// 	switch r.URL.Path {
+// 	case "/":
+// 		homeHandler(w, r)
+// 	case "/contact":
+// 		contactHandler(w, r)
+// 	case "/faq":
+// 		faqHandler(w, r)
+// 	default:
+// 		http.Error(w, "Page not found", http.StatusNotFound)
+// 	}
+// }
 
 // func pathHandler(w http.ResponseWriter, r *http.Request) {
 // 	switch r.URL.Path {
@@ -77,7 +79,10 @@ func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 // }
 
 func main() {
-	var router Router
+	r := chi.NewRouter()
+	r.Get("/", homeHandler)
+	r.Get("/contact", contactHandler)
+	r.Get("/faq", faqHandler)
 	fmt.Println("Starting the server on :3000...")
-	http.ListenAndServe(":3001", router)
+	http.ListenAndServe(":3001", r)
 }
