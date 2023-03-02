@@ -1,2 +1,2 @@
 # Learning Env
-Do no use for anything.
+Do not use for anything.
