@@ -10,7 +10,7 @@ import (
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	bio := `<script>alert("Haha, you have been hac0rd");</script>`
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, "<h1>Welcome to Pet Search</h1><p>Bio:"+bio+"</p><p><a href=\"/contact\">Contact</a><p><a href=\"/faq\">faq</a>")
+	fmt.Fprint(w, "<h1>Welcome to Pet Search</h1><p>Bio:"+bio+"</p><p><a href=\"/contact\">Contact</a><p><a href=\"/faq\">faq</a><p><a href=\"/svg\">Svg</a>")
 
 }
 
@@ -26,11 +26,16 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "<h1>Contact Page</h1><p>Contact Us: <a href=\"mailto:paul@paul.com\">paul@paul.com</a>.")
 }
 
+func svgHandler(w http.ResponseWriter, r *http.Request) {
+	//w.Header().Set("Content-Type", "img; charset=utf-8")
+	fmt.Fprint(w, "<body><img src=\"/cmd/exp/img/grid.svg\" width=\"500\" height=\"500\"></body>")
+}
 func main() {
 	r := chi.NewRouter()
 	r.Get("/", homeHandler)
 	r.Get("/contact", contactHandler)
 	r.Get("/faq", faqHandler)
+	r.Get("/svg", svgHandler)
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Page not found", http.StatusNotFound)
 	})
