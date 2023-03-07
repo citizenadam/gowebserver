@@ -16,10 +16,8 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func faqHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, `<h1>FAQ Page</h1>
-	<ul><li><h2>Free version?</h2>30-day trial available</li><li><h2>Hours?</h2>24/7</li><li><h2>Support line?</h2>888-888-8888</li><li><h2>Monthly cost?</h2>$10</li><li><h2>Mission?</h2>Live to serve</li><li><h2>Location?</h2>Not on Earth</li></ul>
-	`)
+	tplPath := filepath.Join("templates", "faq.gohtml")
+	executeTemplate(w, tplPath)
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
