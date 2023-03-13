@@ -6,7 +6,9 @@ const user = {
     "name": {{.Name}}
     "bio": {{.Bio}}
     "age": {{.Age}}
-
-};
+}
 console.log(user);
+
+{{if .Name}} "Ban Jon" {{else}} "Allow User" {{end}}
+    
 </script>

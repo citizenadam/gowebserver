@@ -9,6 +9,16 @@ type User struct {
 	Name string
 	Age  int
 	Bio  string
+	Authstatus
+	Tags struct {
+		owner int
+		cats  int
+		dogs  int
+	}
+}
+
+type Authstatus struct {
+	Login int
 }
 
 func main() {
@@ -18,9 +28,10 @@ func main() {
 	}
 
 	user := User{
-		Name: "John Smith",
-		Bio:  `<script>alert("Haha, you have been hac0rd");</script>`,
-		Age:  22,
+		Name:       "John Smith",
+		Age:        22,
+		Bio:        `<script>alert("Haha, you have been hac0rd");</script>`,
+		Authstatus: Authstatus{},
 	}
 
 	// user2 := User{
