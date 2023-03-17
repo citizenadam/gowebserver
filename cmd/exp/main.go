@@ -27,19 +27,31 @@ func main() {
 		panic(err)
 	}
 
-	user := User{
+	m := make(map[string]User)
+
+	acct1 := User{
 		Name:       "John Smith",
 		Age:        22,
-		Bio:        `<script>alert("Haha, you have been hac0rd");</script>`,
+		Bio:        `Realtime Dog Dealer`,
 		Authstatus: Authstatus{},
 	}
 
-	// user2 := User{
-	// 	Name: "Jenny Smith",
-	// 	Age:  21,
-	// }
+	acct2 := User{
+		Name:       "Jenny Smith",
+		Age:        21,
+		Bio:        `Doge Entertainment`,
+		Authstatus: Authstatus{},
+		Tags: struct {
+			owner int
+			cats  int
+			dogs  int
+		}{},
+	}
 
-	err = t.Execute(os.Stdout, user)
+	m["acct1"] = acct1
+	m["acct2"] = acct2
+
+	err = t.Execute(os.Stdout, m)
 	if err != nil {
 		panic(err)
 	}
