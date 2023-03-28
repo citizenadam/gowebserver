@@ -1,0 +1,21 @@
+<h1>Hello, {{.Name}}</h1>
+<p>Bio: {{.Bio}}</p>
+
+<script>
+const acct1 = {
+    "name": {{.Name}}
+    "bio": {{.Bio}}
+    "age": {{.Age}}
+}
+
+const acct2 = {
+    "name": {{.Name}}
+    "bio": {{.Bio}}
+    "age": {{.Age}}
+}
+console.log(user);
+
+{{if (eq .Name "John Smith")}} "Ban Jon" {{else}} "Allow User" {{end}}
+{{if (eq .Name "Jenny Smith")}} "Allow Jenny" {{else}} "Ban User" {{end}}
+    
+</script>

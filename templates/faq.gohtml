@@ -1,0 +1,15 @@
+{{template "header" .}}
+<div class="py-6">
+<h1 class="py-4 text-4xl semibold tracking-tight">FAQ Page</h1>
+	<ul class="grid grid-cols-2 gap-16">
+        {{range.}}
+        {{template "qa" .}}
+        {{end}}
+    </ul>
+	</div>
+    {{define "qa"}}
+    <li class="border-t-2 border-indigo-400 py-1 px-2">
+    <span class="block txt-lg text-gray-800 bold">{{.Question}}</span>
+    <span class="block text-sm text-gray-800 semibold">{{.Answer}}</li></span>
+    {{end}}
+{{template "footer" .}}
