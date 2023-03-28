@@ -12,7 +12,18 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+ vendor/
 
 #tmp directory removal
-/tmp
+tmp
+tmp/*
+#Golang Binary
+main.exe
+main
+#Golang Env Files
+*.work
+*.sum
+*.mod
+#Tailwind CMD and Build Ignore
+tailwindconfig.js
+#Fly IO Config (Not used yet)
