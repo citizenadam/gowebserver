@@ -2,12 +2,11 @@ package controllers
 
 import (
 	"net/http"
-	"views"
 )
 
 type Users struct {
 	Templates struct {
-		New views.Template
+		New Template
 	}
 }
 
