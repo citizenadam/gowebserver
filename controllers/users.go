@@ -12,7 +12,12 @@ type Users struct {
 }
 
 func (u Users) New(w http.ResponseWriter, r *http.Request) {
-	u.Templates.New.Execute(w, nil)
+	var data struct {
+		Email    string
+		Password string
+	}
+	data.Email = r.FormValue("email")
+	u.Templates.New.Execute(w, data)
 }
 
 func (u Users) Create(w http.ResponseWriter, r *http.Request) {
@@ -21,6 +26,6 @@ func (u Users) Create(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Fprint(w, "password my balls ", r.FormValue("password"), "\n")
-	fmt.Fprint(w, "email: Is wrong ", r.PostForm.Get("email"), "\n")
+	fmt.Fprint(w, "password: Is Incorrect ", r.FormValue("password"), "\n")
+	fmt.Fprint(w, "email: Does Not Exist ", r.PostForm.Get("email"), "\n")
 }
