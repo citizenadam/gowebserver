@@ -1,58 +1,21 @@
 package main
 
 import (
-	"html/template"
-	"os"
+	"database/sql"
+	"fmt"
+
+	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
-type User struct {
-	Name string
-	Age  int
-	Bio  string
-	Authstatus
-	Tags struct {
-		owner int
-		cats  int
-		dogs  int
-	}
-}
-
-type Authstatus struct {
-	Login int
-}
-
 func main() {
-	t, err := template.ParseFiles("hello.gohtml")
+	db, err := sql.Open("pgx", "host=localhost port=5432 user=baloo password=junglebook dbname=lenslocked sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
-
-	m := make(map[string]User)
-
-	acct1 := User{
-		Name:       "John Smith",
-		Age:        22,
-		Bio:        `Realtime Dog Dealer`,
-		Authstatus: Authstatus{},
-	}
-
-	acct2 := User{
-		Name:       "Jenny Smith",
-		Age:        21,
-		Bio:        `Doge Entertainment`,
-		Authstatus: Authstatus{},
-		Tags: struct {
-			owner int
-			cats  int
-			dogs  int
-		}{},
-	}
-
-	m["acct1"] = acct1
-	m["acct2"] = acct2
-
-	err = t.Execute(os.Stdout, m)
+	defer db.Close()
+	err = db.Ping()
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("Successful Connection!")
 }
