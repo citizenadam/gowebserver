@@ -98,4 +98,20 @@ func main() {
 		}
 	}
 	fmt.Println("Created fake orders.")
+
+	type Order struct {
+		ID          int
+		UserID      int
+		Amount      int
+		Description string
+	}
+	rows, err := db.Query(`
+  SELECT id, amount, description
+  FROM orders
+  WHERE user_id=$1`, userID)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
 }
