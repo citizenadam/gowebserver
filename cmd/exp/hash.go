@@ -14,10 +14,10 @@ func main() {
 
 	password := "this is a totally secret password nobody will guess"
 
-	// Setup our hashing function
+	// Setup  hashing function
 	h := hmac.New(sha256.New, []byte(secretKeyForHash))
 
-	// Write data to our hashing function
+	// Write data to  hashing function
 	h.Write([]byte(password))
 
 	// Get the resulting hash
