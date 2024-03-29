@@ -1,9 +1,11 @@
-package models
+package main
 
 import (
 	"database/sql"
 	"fmt"
-	"models"
+
+	_ "github.com/jackc/pgx/v4/stdlib"
+	"github.com/joncalhoun/lenslocked/models"
 )
 
 type PostgresConfig struct {
