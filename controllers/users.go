@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	"models"
 	"net/http"
 )
 
@@ -9,23 +10,18 @@ type Users struct {
 	Templates struct {
 		New Template
 	}
+	UserService *models.UserService
 }
 
 func (u Users) New(w http.ResponseWriter, r *http.Request) {
 	var data struct {
-		Email    string
-		Password string
+		Email string
 	}
 	data.Email = r.FormValue("email")
 	u.Templates.New.Execute(w, data)
 }
 
 func (u Users) Create(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	fmt.Fprint(w, "password: Is Incorrect ", r.FormValue("password"), "\n")
-	fmt.Fprint(w, "email: Does Not Exist ", r.PostForm.Get("email"), "\n")
+	fmt.Fprintf(w, "<p>Email: %s</p>", r.FormValue("email"))
+	fmt.Fprintf(w, "<p>Password: %s</p>", r.FormValue("password"))
 }
