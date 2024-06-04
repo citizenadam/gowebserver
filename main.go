@@ -30,9 +30,9 @@ func main() {
 	r.Get("/faq", controllers.FAQ(
 		views.Must(views.ParseFS(templates.FS, "faq.gohtml", "tailwind.gohtml"))))
 
-	//fs := http.FileServer(http.FS(robot))
+	fs := http.FileServer(http.FS(robot))
 	r.Get("/robots.txt", func(w http.ResponseWriter, r *http.Request) {
-		http.FileServer(http.FS(robot))
+		fs.ServeHTTP(w, r)
 	})
 
 	usersC := controllers.Users{}

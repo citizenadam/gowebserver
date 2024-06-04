@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /backup/
+Disallow: /admin/
+Disallow: /test/
+Disallow: /*.bak$
+Disallow: /*.tmp$
+Disallow: /*?
+Crawl-delay: 10
+Sitemap: https://localhost.local/sitemap.xml
